@@ -43,8 +43,9 @@ def catch(request):
     }
     return render(request, "catch.html", context)
 
-def hello(request, name):
+def hello(request, name, age):
     context = {
-        "name" : name
+        "name" : name,
+        "age" : age
     }
     return render(request, "hello.html", context)

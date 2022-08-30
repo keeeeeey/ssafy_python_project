@@ -8,5 +8,5 @@ urlpatterns = [
     path('dinner/', views.dinner, name="dinner"),
     path('throw/', views.throw, name="throw"),
     path('catch/', views.catch, name="catch"),
-    path('hello/<name>/', views.hello, name="hello")
+    path('hello/<name>&<age>/', views.hello, name="hello")
 ]
