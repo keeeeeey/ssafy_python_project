@@ -5,7 +5,7 @@ import random
 def index(request):
     # request : 사용자의 요청 정보가 담겨있다.
     # 사용자에게 보여줄 화면 html 파일이름
-    return render(request, "index.html")
+    return render(request, "articles/index.html")
 
 def greeting(request):
     foods = ["apple", "banana", "coconut"]
@@ -16,7 +16,7 @@ def greeting(request):
         "foods" : foods,
         "info" : info
     }
-    return render(request, "greeting.html", context)
+    return render(request, "articles/greeting.html", context)
 
 def dinner(request):
     foods = ["족발", "햄버거", "치킨", "초밥"]
@@ -27,10 +27,10 @@ def dinner(request):
         "foods" : foods,
         "number" : number
     }
-    return render(request, "dinner.html", context)
+    return render(request, "articles/dinner.html", context)
 
 def throw(request):
-    return render(request, "throw.html")
+    return render(request, "articles/throw.html")
 
 def catch(request):
     print(request)
@@ -41,11 +41,11 @@ def catch(request):
     context = {
         "message" : message
     }
-    return render(request, "catch.html", context)
+    return render(request, "articles/catch.html", context)
 
 def hello(request, name, age):
     context = {
         "name" : name,
         "age" : age
     }
-    return render(request, "hello.html", context)
+    return render(request, "articles/hello.html", context)

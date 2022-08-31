@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
         "./assignment"
-    ]
+    ],
+    "python.pythonPath": "/Users/kimkiyun/Desktop/ssafy_python_project/venv/bin/python3.9"
 }
