@@ -13,8 +13,8 @@
         <input type="date" name="release_date" value="{{ movie.release_date|date:"Y-m-d" }}"><br>
         <label for="genre">GENRE </label>
         <select name="genre">
-            <option value="코미디" {% if movie.genre == "코미디" %} selected="selected" {% endif %}>코미디</option>
-            <option value="액션" {% if movie.genre == "액션" %} selected="selected" {% endif %}>액션</option>
+            <option value="코미디" {% if movie.genre == "코미디" %} selected {% endif %}>코미디</option>
+            <option value="액션" {% if movie.genre == "액션" %} selected {% endif %}>액션</option>
         </select><br>
         <label for="score">SCORE </label>
         <input type="text" name="score" id="score" value="{{ movie.score }}"><br>
