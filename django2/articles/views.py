@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Article
+from .forms import ArticleForm
 
 # Create your views here.
 def index(request):
@@ -10,11 +11,24 @@ def index(request):
     return render(request, "articles/index.html", context)
 
 def new(request):
-    return render(request, "articles/new.html")
+    form = ArticleForm()
+    context = {
+        "form" : form,
+    }
+    return render(request, "articles/new.html", context)
 
 def create(request):
-    title = request.POST.get("title")
-    content = request.POST.get("content")
+    form = ArticleForm(request.POST)
+    if form.is_valid():
+        article = form.save
+        return redirect("articles:detail", article.pk)
+    # print(f"에러: {form.errors}")
+    context = {
+        "form" : form,
+    }
+    return render(request, "articles/new.html", context)
+    # title = request.POST.get("title")
+    # content = request.POST.get("content")
 
     # 1
     # article = Article()
@@ -23,14 +37,14 @@ def create(request):
     # article.save()
 
     # 2
-    article = Article(title = title, content = content)
-    article.save()
+    # article = Article(title = title, content = content)
+    # article.save()
 
     # 3
     # Article.objects.create(title = title, content = content)
 
     # return redirect("articles:index")
-    return redirect("articles:detail", article.pk)
+    # return redirect("articles:detail", article.pk)
 
 def detail(request, pk):
     article = Article.objects.get(pk=pk)
@@ -46,14 +60,24 @@ def delete(request, pk):
 
 def edit(request, pk):
     article = Article.objects.get(pk=pk)
+    form = ArticleForm(instance=article)
     context = {
         "article" : article,
+        "form" : form,
     }
     return render(request, "articles/edit.html", context)
 
 def update(request, pk):
     article = Article.objects.get(pk=pk)
-    article.title = request.POST.get("title")
-    article.content = request.POST.get("content")
-    article.save()
-    return redirect("articles:detail", article.pk)
+    form = ArticleForm(request.POST, instance=article)
+    if form.is_valid:
+        form.save()
+        return redirect("articles:detail", article.pk)
+    context = {
+        "form" : form,
+    }
+    return render(request, "articles/edit.html", context)
+    # article.title = request.POST.get("title")
+    # article.content = request.POST.get("content")
+    # article.save()
+    # return redirect("articles:detail", article.pk)
