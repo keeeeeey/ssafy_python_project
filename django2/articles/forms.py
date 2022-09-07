@@ -13,7 +13,7 @@ from .models import Article
 #     title = forms.CharField(max_length=10)
 #     content = forms.CharField(widget=forms.Textarea)
 #     nation = forms.ChoiceField(choices=NATIONS_CHOICES)
-    # nation = forms.ChoiceField(choices=NATIONS_CHOICES, widget=forms.RadioSelect)
+#     nation = forms.ChoiceField(choices=NATIONS_CHOICES, widget=forms.RadioSelect)
 
 class ArticleForm(forms.ModelForm):
 
