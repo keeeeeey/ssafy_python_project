@@ -33,3 +33,25 @@ def detail(request, pk):
         "movie" : movie,
     }
     return render(request, "movies/detail.html", context)
+
+@require_POST
+def delete(request, pk):
+    movie = get_object_or_404(Movies, pk=pk)
+    movie.delete()
+    return redirect("movies:index")
+
+@require_http_methods(["GET", "POST"])
+def update(request, pk):
+    movie = get_object_or_404(Movies, pk=pk)
+    if request.method == "POST":
+        form = MovieForm(request.POST, instance=movie)
+        if form.is_valid():
+            form.save()
+            return redirect("movies:detail", movie.pk)
+    else:
+        form = MovieForm(instance=movie)
+    context = {
+        "form" : form,
+        "movie" : movie,
+    }
+    return render(request, "movies/update.html", context)
