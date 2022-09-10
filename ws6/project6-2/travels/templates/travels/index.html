@@ -6,8 +6,9 @@
     <hr>
     <ul>
         {% for travel in travels %}
-            <li><a href="{% url "travels:detail" travel.pk %}">{{ travel.location }}</a></li>
-            <p>{{ travel.plan }}</p>
+            <p>장소 : {{ travel.location }}</p>
+            <p>시작일 : {{ travel.start_date }}</p>
+            <a href="{% url "travels:detail" travel.pk %}">[detail]</a>
         {% endfor %}
     </ul>
 {% endblock content %}
