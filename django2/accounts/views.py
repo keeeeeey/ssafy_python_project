@@ -30,7 +30,8 @@ def login(request):
 @require_POST
 def logout(request):
     # 로그아웃
-    auth_logout(request)
+    if request.user.is_authenticated:
+        auth_logout(request)
     return redirect("articles:index")
 
 @require_http_methods(["GET", "POST"])
@@ -49,9 +50,11 @@ def signup(request):
     }
     return render(request, "accounts/signup.html", context)
 
+@require_POST
 def delete(request):
-    auth_logout(request)
-    request.user.delete()
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request)
     return redirect("articles:index")
 
 @login_required
