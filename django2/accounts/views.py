@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe, require_http_methods, require_POST
 
 # Create your views here.
-@login_required
 @require_http_methods(["GET", "POST"])
 def login(request):
     if request.method == "POST":
