@@ -15,7 +15,7 @@
     <hr>
     <a href="{% url "articles:index" %}">[back]</a>
 
-    <hr>
+    {% comment %} <hr>
     <h2>수동으로 Form 작성</h2>
     <form action="#">
         <div>
@@ -49,5 +49,5 @@
         {% buttons %}
             <button type="submit" class="btn btn-primary">Submit</button>
         {% endbuttons %}
-    </form>
+    </form> {% endcomment %}
 {% endblock content %}

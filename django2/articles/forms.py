@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article, Comment
 
 # class ArticleForm(forms.Form):
 #     NATION_A = "kr"
@@ -45,3 +45,21 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = "__all__"
+
+class CommentForm(forms.ModelForm):
+
+    # comment = forms.CharField(
+    #     label = "댓글",
+    #     widget = forms.Textarea(
+    #         attrs = {
+    #             "class" : "my-comment form-control",
+    #             "placeholder" : "Enter the comment",
+    #             "rows" : 5,
+    #             "cols" : 50,
+    #         }
+    #     )
+    # )
+
+    class Meta:
+        model = Comment
+        exclude = ("article",)
