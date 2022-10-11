@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d*#(io^rxl3ndufi!(cs^#ft)m#1fk8f1_s85+*f%)(gs9x2g8'
+SECRET_KEY = 'django-insecure-0akgal)c5v0*fsu=#c_3i8np=kxno183lwgx9aj5cc^6uajh@z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -20,7 +20,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "movies",
+    "accounts",
     "django_extensions",
+    "bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -113,3 +115,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "accounts.User"

@@ -1,7 +1,13 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+from django.views.decorators.http import (require_http_methods, require_POST, require_safe)
+
+from .forms import MovieForm
 from .models import Movie
 
+
 # Create your views here.
+@require_safe
 def index(request):
     movies = Movie.objects.all()
     context = {
@@ -9,23 +15,26 @@ def index(request):
     }
     return render(request, "movies/index.html", context)
 
-def new(request):
-    return render(request, "movies/new.html")
-
+@require_http_methods(["GET", "POST"])
 def create(request):
-    title = request.POST.get("title")
-    audience = request.POST.get("audience")
-    release_date = request.POST.get("release_date")
-    genre = request.POST.get("genre")
-    score = request.POST.get("score")
-    poster_url = request.POST.get("poster_url")
-    description = request.POST.get("description")
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
 
-    movie = Movie(title=title, audience=audience, release_date=release_date,
-                    genre=genre, score=score, poster_url=poster_url, description=description)
-    movie.save()
-    return redirect("movies:index")
+    if request.method == "POST":
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            movie = form.save(commit=False)
+            movie.user = request.user
+            movie.save()
+            return redirect("movies:index")
+    else:
+        form = MovieForm()
+    context = {
+        "form" : form,
+    }
+    return render(request, "movies/create.html", context)
 
+@require_safe
 def detail(request, pk):
     movie = Movie.objects.get(pk=pk)
     context = {
@@ -33,33 +42,34 @@ def detail(request, pk):
     }
     return render(request, "movies/detail.html", context)
 
-def edit(request, pk):
-    movie = Movie.objects.get(pk=pk)
-    context = {
-        "movie" : movie,
-    }
-    return render(request, "movies/edit.html", context)
-
+@require_http_methods(["GET", "POST"])
 def update(request, pk):
-    title = request.POST.get("title")
-    audience = request.POST.get("audience")
-    release_date = request.POST.get("release_date")
-    genre = request.POST.get("genre")
-    score = request.POST.get("score")
-    poster_url = request.POST.get("poster_url")
-    description = request.POST.get("description")
-    movie = Movie.objects.get(pk=pk)
-    movie.title = title
-    movie.audience = audience
-    movie.release_date = release_date
-    movie.genre = genre
-    movie.score = score
-    movie.poster_url = poster_url
-    movie.description = description
-    movie.save()
-    return redirect("movies:detail", movie.pk)
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
 
-def delete(request, pk):
     movie = Movie.objects.get(pk=pk)
-    movie.delete()
+    if movie.user == request.user:
+        if request.method == "POST":
+            form = MovieForm(request.POST, instance=movie)
+            if form.is_valid():
+                form.save()
+                return redirect("movies:detail", movie.pk)
+        else:
+            form = MovieForm(instance=movie)
+        context = {
+            "movie" : movie,
+            "form" : form,
+        }
+        return render(request, "movies/update.html", context)
+    else:
+        return redirect("movies:index")
+
+@require_POST
+def delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("accounts:login")
+    
+    if movie.user == request.user:
+        movie = Movie.objects.get(pk=pk)
+        movie.delete()
     return redirect("movies:index")
