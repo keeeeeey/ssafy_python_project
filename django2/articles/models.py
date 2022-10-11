@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from imagekit.processors import Thumbnail
+from imagekit.models import ProcessedImageField
 
 def articles_image_path(instance, filename):
     return f"images/{instance.user.username}/{filename}"
@@ -12,6 +14,13 @@ class Article(models.Model):
     # image = models.ImageField(blank=True)
     # image = models.ImageField(blank=True, upload_to="images/")
     # image = models.ImageField(blank=True, upload_to="%Y/%m/%d")
+    image = ProcessedImageField(
+        blank=True,
+        uploae_to="thumbnails/",
+        processors=[Thumbnail(200, 300)],
+        format="JPEG",
+        options={"quality": 80},
+    )
     image = models.ImageField(blank=True, upload_to=articles_image_path)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
