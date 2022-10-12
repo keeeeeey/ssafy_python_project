@@ -1,0 +1,61 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$fVXoAF2bpkXQEhDKEOE9oK$SJajqJC2U2Mbg8/LW9vV3lwHI0Yr+tw1hS5MbwpjTns=",
+        "last_login": "2022-09-07T06:13:51.152Z",
+        "is_superuser": false,
+        "username": "test1",
+        "first_name": "기윤",
+        "last_name": "킴",
+        "email": "sseioul@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-09-07T06:13:50.975Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$a2Na63jpVediSc3R0arJie$cEDje9ymdcdRf4plFbp+mQSwgf9n+icqeOmHAIqaBTQ=",
+        "last_login": "2022-10-12T06:43:44.500Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2022-10-05T06:15:38.162Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$FGhPVDy7kpWLwAkz3PIhHb$RnUh2RX8+3tsirzeocCaOVhqR/zHt1m6g2oHLgP0Mf4=",
+        "last_login": "2022-10-12T06:43:00.055Z",
+        "is_superuser": false,
+        "username": "sseioul",
+        "first_name": "",
+        "last_name": "",
+        "email": "sseioul@naver.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-10-12T06:42:59.873Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            5
+        ]
+    }
+}
+]

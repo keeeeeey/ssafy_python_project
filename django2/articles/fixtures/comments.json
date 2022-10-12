@@ -1,0 +1,13 @@
+[
+{
+    "model": "articles.comment",
+    "pk": 3,
+    "fields": {
+        "article": 5,
+        "user": 5,
+        "content": "댓글고고",
+        "created_at": "2022-10-05T06:16:12.224Z",
+        "updated_at": "2022-10-05T06:16:12.224Z"
+    }
+}
+]
