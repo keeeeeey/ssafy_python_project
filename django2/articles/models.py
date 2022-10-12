@@ -9,6 +9,7 @@ def articles_image_path(instance, filename):
 # Create your models here.
 class Article(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_articles")
     title = models.CharField(max_length = 10)
     content = models.TextField()
     image = models.ImageField(blank=True)
