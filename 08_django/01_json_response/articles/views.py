@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from .serializers import ArticleSerializer
 from .models import Article
+from django.http.response import JsonResponse, HttpResponse
+from django.core import serializers
 
 # Create your views here.
 def article_html(request):
@@ -15,12 +17,25 @@ def article_html(request):
 
 def article_json_1(request):
     articles = Article.objects.all()
-    pass
+    articles_json = []
+
+    for article in articles:
+        articles_json.append(
+            {
+                "id": article.pk,
+                "title": article.title,
+                "content": article.content,
+                "created_at": article.created_at,
+                "updated_at": article.updated_at,
+            }
+        )
+    return JsonResponse(articles_json, safe=False)
 
 
 def article_json_2(request):
     articles = Article.objects.all()
-    pass
+    data = serializers.serialize("json", articles)
+    return HttpResponse(data, content_type="application/json")
 
 
 # @api_view(['GET'])
