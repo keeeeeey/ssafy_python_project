@@ -1,25 +1,17 @@
-const numbers = [1, 2, 3, 4, 5]
+// 1. 숫자가 담긴 배열로 각 숫자들의 제곱근이 들어있는 새로운 배열을 만드시오.
+const newNumbers = [4, 9, 16]
 
-const doubleElement = function (number) {
-  return number * 2
-}
+// answer
+const numbers = newNumbers.map(number => number ** 0.5)
+console.log(numbers)
 
-// 1.
-const newArr = numbers.map(doubleElement)
-console.log(newArr)
+// 2. images의 요소들의 height 값만 저장되어 있는 배열 heights 를 만드시오.
+const images = [
+  { height: '34px', width: '39px' },
+  { height: '54px', width: '19px' },
+  { height: '83px', width: '75px' },
+]
 
-// 2.
-const newArr2 = numbers.map(function (number) {
-  return number * 2
-})
-console.log(newArr2)
-
-// 3.
-const newArr3 = numbers.map(number => {
-  return number * 2
-})
-console.log(newArr3)
-
-// 4.
-const newArr4 = numbers.map(number => number * 2)
-console.log(newArr4)
+// answer
+const heights = images.map(image => image.height)
+console.log(heights)

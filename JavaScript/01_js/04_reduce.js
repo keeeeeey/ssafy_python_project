@@ -1,10 +1,15 @@
-const numbers = [90, 90, 80, 77]
+// 1. 배열에 담긴 중복된 이름을 {'이름': 수} 형태의 object로 반환하세요.
 
-const sum = numbers.reduce(function (total, x) {
-  return total + x
-}, 0)
+const names = ["harry", "aiden", "julie", "julie", "edward"];
 
-console.log(sum)
-
-const sum2 = numbers.reduce((total, x) => total + x, 0)
-console.log(sum2)
+// answer
+console.log(
+  names.reduce((acc, name) => {
+    if (name in acc) {
+      acc[name] += 1;
+    } else {
+      acc[name] = 1;
+    }
+    return acc;
+  }, {})
+);
