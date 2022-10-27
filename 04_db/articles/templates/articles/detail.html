@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <h2>{{ article.pk }}번째 글입니다.</h2>
+  <hr>
+  <p><b>작성자 : {{ article.user }}</b></p>
+  <p>제목 : {{ article.title }}</p>
+  <p>내용 : {{ article.content }}</p>
+  <p>작성 시각 : {{ article.created_at }}</p>
+  <p>수정 시각 : {{ article.updated_at }}</p>
+  {% if request.user == article.user %}
+    <a href="{% url 'articles:update' article.pk %}">UPDATE</a>
+    <form action="{% url 'articles:delete' article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE">
+    </form>
+  {% endif %}
+  <hr>
+  <a href="{% url 'articles:index' %}">뒤로가기</a>
+  <hr>
+  <h4>댓글 목록</h4>
+  {% if comments %}
+    <p>{{ comments|length }}개의 댓글이 있습니다.</p>
+  {% endif %}
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.user }} - {{ comment.content }}
+        {% if request.user == comment.user %}
+          <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="DELETE">
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>댓글이 없어요...</li>
+    {% endfor %}
+  </ul>
+  <hr>
+  {% if request.user.is_authenticated %}
+    <form id="comment-form">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">댓글을 작성하려면 로그인 하세요.</a>
+  {% endif %}
+{% endblock content %}
+
+{% block script %}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.querySelector('#comment-form')
+    const input = document.querySelector('[name=content]')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+        // 이곳에 코드를 작성하세요
+      
+      // 자바스크립트에서 form 만들어서 보내는 방법
+      let data = new FormData()
+      // form 안에 데이터 포함시키는 방법
+      // append(input(name), value)
+      data.append("content", input.value)
+
+      axios({
+        method: 'POST',
+        url: `http://127.0.0.1:8000/articles/{{article.pk}}/comments/`,
+        data,
+        headers: {'X-CSRFToken': csrftoken}
+      })
+        .then((response)=>{
+          // data 안에는 게이물 pk, 댓글 pk 들어왔음
+          const data = response.data
+          const li = document.createElement('li')
+          li.innerHTML = `
+            {{request.user.username}} - ${input.value}
+            <form action="/${data.article_pk}/comments/${data.comment_pk}/delete/" method="POST">
+              {% csrf_token %}
+              <input type="submit" value="DELETE">
+            </form>
+          `
+          const ul = document.querySelector("#comment_list")
+          ul.appendChild(li)
+
+          input.value = ""
+        })
+    })
+
+  </script>
+{% endblock script %}
