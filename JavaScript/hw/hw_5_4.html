@@ -18,24 +18,20 @@
 
     // console.log('Bye')
 
-    axios
-        .get("https://jsonplaceholder.typicode.com/todos/1/")
-        .then((response) => {
-          console.log('Hi')
-          return response.data;
-        })
-        .then((response) => {
-          setTimeout(function () {
-            console.log('SSAFY')
-          }, 3000)
-          return response.title;
-        })
-        .then((response) => {
-          console.log('Bye')
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    console.log("HI")
+
+    function logPrint() {
+      return new Promise(function (resolve) {
+        setTimeout(() => {
+          console.log("SSAFY")
+          resolve();
+        }, 3000)
+      })
+    }
+
+    logPring().then(() => {
+      console.log("BYE")
+    })
   </script>
 </body>
 </html>
