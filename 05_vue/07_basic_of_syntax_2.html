@@ -13,9 +13,9 @@
     <div v-for="char in myStr">
       {{ char }}
     </div>
-    <!-- <div v-for="(char, index) in myStr" :key="index">
+    <div v-for="(char, index) in myStr" :key="index">
       <p>{{ index }}번째 문자열 {{ char }}</p>
-    </div> -->
+    </div>
 
     <h2>Array</h2>
     <div v-for="(item, index) in myArr" :key="index">
@@ -23,18 +23,18 @@
     </div>
 
     <div v-for="(item, index) in myArr2" :key="`arry-${index}`">
-      <p>{{ index.id }}번째 아이템</p>
+      <p>{{ item.id }}번째 아이템</p>
 		  <p>{{ item.name }}</p>
     </div>
 
     <h2>Object</h2>
-    <!-- <div v-for="value in myObj">
+    <div v-for="value in myObj">
       <p>{{ value }}</p>
-    </div> -->
+    </div>
 
-    <!-- <div v-for="(value, key) in myObj" :key="key">
+    <div v-for="(value, key) in myObj" :key="key">
       <p>{{ key }} : {{ value }}</p>
-    </div> -->
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -56,10 +56,10 @@
 			  ],
         
         // 3. Object
-        // myObj: {
-        //   name: 'harry',
-        //   age: 27
-        // },
+        myObj: {
+          name: 'harry',
+          age: 27
+        },
       }
     })
   </script>

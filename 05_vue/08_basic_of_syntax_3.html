@@ -26,8 +26,8 @@
 </head>
 <body>
   <div id="app">
-    <!-- <button v-on:click="number++">increase Number</button>
-    <p>{{ number }}</p> -->
+    <button v-on:click="number++">increase Number</button>
+    <p>{{ number }}</p>
 
     <!-- <button v-on:click="toggleActive">toggle isActive</button>
     <p>{{ isActive }}</p> -->
@@ -36,7 +36,7 @@
   </div>
 
   <div id="app2">
-    <!-- <a v-bind:href="url">Go To GOOGLE</a> -->
+    <a v-bind:href="url">Go To GOOGLE</a>
 
     <!-- <p v-bind:class="redTextClass">빨간 글씨</p>
     <p v-bind:class="{ 'red-text': true }">빨간 글씨</p>
@@ -49,11 +49,11 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script>
     const app = new Vue({
-      // el: '#app',
-      // data: {
-      //   number: 0,
-      //   isActive: false,
-      // },
+      el: '#app',
+      data: {
+        number: 0,
+        // isActive: false,
+      },
       // methods: {
       //   toggleActive: function () {
       //     this.isActive = !this.isActive
@@ -66,14 +66,14 @@
     })
 
     const app2 = new Vue({
-      // el: '#app2',
-      // data: {
-      //   url: 'https://www.google.com/',
-      //   redTextClass: 'red-text',
-      //   borderBlack: 'border-black',
-      //   isActive: true,
-      //   theme: 'dark-mode'
-      // },
+      el: '#app2',
+      data: {
+        url: 'https://www.google.com/',
+        // redTextClass: 'red-text',
+        // borderBlack: 'border-black',
+        // isActive: true,
+        // theme: 'dark-mode'
+      },
       // methods: {
       //   darkModeToggle() {
       //     this.isActive = !this.isActive
