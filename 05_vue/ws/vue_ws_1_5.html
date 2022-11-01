@@ -27,7 +27,7 @@
         },
 
         toMbti : function () {
-            if (!this.mbti.trim) {
+            if (!this.mbti.trim()) {
                 alert("빈값입니다!")
             } else if (!this.allTypes.includes(this.mbti)) {
                 alert("MBTI 유형이 아닙니다!")

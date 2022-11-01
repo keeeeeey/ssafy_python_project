@@ -80,18 +80,18 @@
       <h1>버튼 클릭하기</h1>
       <section class="buttonArea">
         <div class="buttonRow">
-          <div class="btn {selected : isSelected1}" @click="onClick(1)">
+          <div class="btn" @click="onClick(1)" :class="{selected : isSelected1}">
             <span class="type">1</span>
           </div>
-          <div class="btn {selected : isSelected2}" @click="onClick(2)">
+          <div class="btn" @click="onClick(2)" :class="{selected : isSelected2}">
             <span class="type">2</span>
           </div>
         </div>
         <div class="buttonRow">
-          <div class="btn {selected : isSelected3}" @click="onClick(3)">
+          <div class="btn" @click="onClick(3)" :class="{selected : isSelected3}">
             <span class="type">3</span>
           </div>
-          <div class="btn {selected : isSelected4}" @click="onClick(4)">
+          <div class="btn" @click="onClick(4)" :class="{selected : isSelected4}">
             <span class="type">4</span>
           </div>
         </div>

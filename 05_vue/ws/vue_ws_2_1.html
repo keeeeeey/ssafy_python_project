@@ -18,7 +18,7 @@
 <body>
   <div id="app">
     <h1>박스 색상 바꾸기</h1>
-    <h3>색상 : </h3>
+    <h3>색상 : {{ pick }}</h3>
     <div class="box" @click="onClick">
     </div>
   </div>
@@ -30,10 +30,12 @@
       el: '#app',
       data: {
         colors : ['red', 'orange', 'yellow', 'green', 'blue', 'violet'],
+        pick : ""
       },
       methods: {
         onClick: function (event) {
             const color = _.random(0, 5)
+            this.pick = this.colors[color]
             event.target.style.backgroundColor = this.colors[color]
         }
       }
