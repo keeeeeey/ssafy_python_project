@@ -14,30 +14,36 @@
 <body>
   <div id="app">
     <h1>Cat Image</h1>
-    <img :src="catUrl" alt="cat"><br>
+    <img :src="url" alt="cat"><br>
     <button @click="getCat">Get Cat</button>
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    const API_URI = "https://api.thecatapi.com/v1/images/search"
     const app = new Vue({
       el: '#app',
       data: {
-        catUrl : "",
+        url : "",
       },
       methods: {
-        getCat : function () {
-          axios({
-            method : "get",
-            url : API_URI,
-          })
-            .then((response) => {
-              this.catUrl = response.data[0].url
-              console.log(this.catUrl)
-            })
+        getCat() {
+          const API_URI = "https://api.thecatapi.com/v1/images/search"
+          axios.get(API_URI).then((response) => {
+            this.url = response.data[0].url;
+          })  
         }
+      },
+      created() {
+        // created 단계에서 실행하고 싶은 코드를 작성
+        const API_URI = "https://api.thecatapi.com/v1/images/search"
+        axios.get(API_URI).then((response) => {
+          this.url = response.data[0].url;
+        })
+      },
+      updated() {
+        // 변경사항이 있을때 실행하고 싶은 코드를 작성
+        console.log(this.url)
       }
     })
   </script>
