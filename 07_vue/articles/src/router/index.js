@@ -28,6 +28,10 @@ const routes = [
     name: 'detail',
     component: DetailView
   },
+  {
+    path: '*',
+    redirect: { name: 'NotFound404' }
+  }
 ]
 
 const router = new VueRouter({
