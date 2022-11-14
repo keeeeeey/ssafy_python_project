@@ -41,6 +41,9 @@ export default {
         method: "POST",
         url: `${API_URL}/api/v1/articles/`,
         data: { title, content },
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
       })
         .then(() => {
           this.$router.push({ name: "ArticleView" })
